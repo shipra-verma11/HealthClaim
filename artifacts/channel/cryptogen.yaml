@@ -28,7 +28,7 @@ PeerOrgs:
   # ---------------------------------------------------------------------------
   - Name: Insurance
     Domain: insurance.example.com
-    EnableNodeOUs: true
+    #EnableNodeOUs: true
     # ---------------------------------------------------------------------------
     # "CA"
     # ---------------------------------------------------------------------------
@@ -100,7 +100,7 @@ PeerOrgs:
   # ---------------------------------------------------------------------------
   - Name: Hospital
     Domain: hospital.example.com
-    EnableNodeOUs: true
+    #EnableNodeOUs: true
     CA:
        Hostname: ca # implicitly ca.hospital.example.com
 
