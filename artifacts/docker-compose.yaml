@@ -5,6 +5,9 @@
 #
 version: '2'
 
+networks:
+  HealthClaimNetwork:
+
 services:
 
   ca.insurance.example.com:
@@ -13,16 +16,18 @@ services:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca-insurance
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.insurance.example.com-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/1388022e282edbbbc80a6340f5a31955aa95a634feb207d24b8cf537d1c62e96_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/0f2b49cde85032dda569ab74b9fc4af8000482d30ecb5fd50cb9030fab0d6e09_sk
       - FABRIC_CA_SERVER_TLS_ENABLED=true
       - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.insurance.example.com-cert.pem
-      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/1388022e282edbbbc80a6340f5a31955aa95a634feb207d24b8cf537d1c62e96_sk
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/0f2b49cde85032dda569ab74b9fc4af8000482d30ecb5fd50cb9030fab0d6e09_sk
     ports:
       - "7054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     volumes:
       - ./channel/crypto-config/peerOrganizations/insurance.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
     container_name: ca_peerInsurance
+    networks:
+      - HealthClaimNetwork
 
   ca.hospital.example.com:
     image: hyperledger/fabric-ca:1.4.7
@@ -30,16 +35,18 @@ services:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca-hospital
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.hospital.example.com-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/ca85af8beb6602ff5f25def16ee4eefe6297c2fec690f6e4f8c609ff3499fc89_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/560d7595cf1c015ab3d2523225cb60cf800a2114d1706522252d7920ce69e36b_sk
       - FABRIC_CA_SERVER_TLS_ENABLED=true
       - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.hospital.example.com-cert.pem
-      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/ca85af8beb6602ff5f25def16ee4eefe6297c2fec690f6e4f8c609ff3499fc89_sk
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/560d7595cf1c015ab3d2523225cb60cf800a2114d1706522252d7920ce69e36b_sk
     ports:
       - "8054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     volumes:
       - ./channel/crypto-config/peerOrganizations/hospital.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
     container_name: ca_peerHospital
+    networks:
+      - HealthClaimNetwork
 
   orderer.example.com:
     container_name: orderer.example.com
@@ -64,6 +71,8 @@ services:
         - ./channel/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/:/etc/hyperledger/crypto/orderer
         - ./channel/crypto-config/peerOrganizations/insurance.example.com/peers/peer0.insurance.example.com/:/etc/hyperledger/crypto/peerInsurance
         - ./channel/crypto-config/peerOrganizations/hospital.example.com/peers/peer0.hospital.example.com/:/etc/hyperledger/crypto/peerHospital
+    networks:
+      - HealthClaimNetwork
 
   peer0.insurance.example.com:
     container_name: peer0.insurance.example.com
@@ -83,6 +92,8 @@ services:
         - ./channel/crypto-config/peerOrganizations/insurance.example.com/peers/peer0.insurance.example.com/:/etc/hyperledger/crypto/peer
     depends_on:
       - orderer.example.com
+    networks:
+      - HealthClaimNetwork
 
   peer1.insurance.example.com:
     container_name: peer1.insurance.example.com
@@ -102,6 +113,8 @@ services:
         - ./channel/crypto-config/peerOrganizations/insurance.example.com/peers/peer1.insurance.example.com/:/etc/hyperledger/crypto/peer
     depends_on:
       - orderer.example.com
+    networks:
+      - HealthClaimNetwork
 
   peer0.hospital.example.com:
     container_name: peer0.hospital.example.com
@@ -121,6 +134,8 @@ services:
         - ./channel/crypto-config/peerOrganizations/hospital.example.com/peers/peer0.hospital.example.com/:/etc/hyperledger/crypto/peer
     depends_on:
       - orderer.example.com
+    networks:
+      - HealthClaimNetwork
 
   peer1.hospital.example.com:
     container_name: peer1.hospital.example.com
@@ -140,6 +155,8 @@ services:
         - ./channel/crypto-config/peerOrganizations/hospital.example.com/peers/peer1.hospital.example.com/:/etc/hyperledger/crypto/peer
     depends_on:
       - orderer.example.com
+    networks:
+      - HealthClaimNetwork
 
   cli:
     container_name: cli
@@ -147,7 +164,7 @@ services:
     tty: true
     stdin_open: true
     environment:
-      - SYS_CHANNEL=syschannel
+      - SYS_CHANNEL=hcn-sys-channel
       - GOPATH=/opt/gopath
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
       #- FABRIC_LOGGING_SPEC=DEBUG
@@ -174,4 +191,6 @@ services:
       - peer1.insurance.example.com
       - peer0.hospital.example.com
       - peer1.hospital.example.com
+    networks:
+      - HealthClaimNetwork
 

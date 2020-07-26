@@ -12,7 +12,7 @@ OrdererOrgs:
   # ---------------------------------------------------------------------------
   - Name: Orderer
     Domain: example.com
-    EnableNodeOUs: true
+    #EnableNodeOUs: true
     # ---------------------------------------------------------------------------
     # "Specs" - See PeerOrgs below for complete description
     # ---------------------------------------------------------------------------
