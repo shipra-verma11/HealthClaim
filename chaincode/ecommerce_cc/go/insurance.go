@@ -107,8 +107,8 @@ func (t *insuranceClaim) registerCustomer(APIstub shim.ChaincodeStubInterface, a
 	}
 
 	// check whether customer exists
-	_, err := APIstub.GetState(args[3])
-	if err != nil {
+	customerD, err := APIstub.GetState(args[3])
+	if customerD == nil {
 		// get customer id
 		getCustomerID := getCounter(APIstub, customerCounterNo)
 		// upload customer data
