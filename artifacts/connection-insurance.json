@@ -1,0 +1,60 @@
+{
+    "name": "first-network-insurance",
+    "version": "1.0.0",
+    "client": {
+        "organization": "insurance",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                }
+            }
+        }
+    },
+    "organizations": {
+        "insurance": {
+            "mspid": "InsuranceMSP",
+            "peers": [
+                "peer0.insurance.example.com",
+                "peer1.insurance.example.com"
+            ],
+            "certificateAuthorities": [
+                "ca.insurance.example.com"
+            ]
+        }
+    },
+    "peers": {
+        "peer0.insurance.example.com": {
+            "url": "grpcs://localhost:7051",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICbTCCAhSgAwIBAgIRAJ8QqoJrCxNLYGbRiU+mzh4wCgYIKoZIzj0EAwIwgYAx\nCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4g\nRnJhbmNpc2NvMR4wHAYDVQQKExVpbnN1cmFuY2UuZXhhbXBsZS5jb20xJDAiBgNV\nBAMTG3Rsc2NhLmluc3VyYW5jZS5leGFtcGxlLmNvbTAeFw0yMDA3MjYxMTQ1MDBa\nFw0zMDA3MjQxMTQ1MDBaMIGAMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZv\ncm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEeMBwGA1UEChMVaW5zdXJhbmNl\nLmV4YW1wbGUuY29tMSQwIgYDVQQDExt0bHNjYS5pbnN1cmFuY2UuZXhhbXBsZS5j\nb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATSme2bUvykCUutBweD/DuMuKDN\nRLuX3cFD9pC8QfkfVS3O9a/sc0f1Y/CucT4bIVa+LwKq3R2tsolciIEiVKHuo20w\nazAOBgNVHQ8BAf8EBAMCAaYwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMB\nMA8GA1UdEwEB/wQFMAMBAf8wKQYDVR0OBCIEILPxxPkNlCHlTO0BZftQlbT9x6a+\nQWQAEh/UI6p0sMsUMAoGCCqGSM49BAMCA0cAMEQCIASI7TOl1r/luvNnvVAdX2wT\nUXMf3uzjgF/MPdq4ns+DAiAcwkcyK6IrsrJpQYvLj1nerFTL8oVEWXTirFU1LBIX\nAw==\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.insurance.example.com",
+                "hostnameOverride": "peer0.insurance.example.com"
+            }
+        },
+        "peer1.insurance.example.com": {
+            "url": "grpcs://localhost:7056",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICbTCCAhSgAwIBAgIRAJ8QqoJrCxNLYGbRiU+mzh4wCgYIKoZIzj0EAwIwgYAx\nCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4g\nRnJhbmNpc2NvMR4wHAYDVQQKExVpbnN1cmFuY2UuZXhhbXBsZS5jb20xJDAiBgNV\nBAMTG3Rsc2NhLmluc3VyYW5jZS5leGFtcGxlLmNvbTAeFw0yMDA3MjYxMTQ1MDBa\nFw0zMDA3MjQxMTQ1MDBaMIGAMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZv\ncm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEeMBwGA1UEChMVaW5zdXJhbmNl\nLmV4YW1wbGUuY29tMSQwIgYDVQQDExt0bHNjYS5pbnN1cmFuY2UuZXhhbXBsZS5j\nb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATSme2bUvykCUutBweD/DuMuKDN\nRLuX3cFD9pC8QfkfVS3O9a/sc0f1Y/CucT4bIVa+LwKq3R2tsolciIEiVKHuo20w\nazAOBgNVHQ8BAf8EBAMCAaYwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMB\nMA8GA1UdEwEB/wQFMAMBAf8wKQYDVR0OBCIEILPxxPkNlCHlTO0BZftQlbT9x6a+\nQWQAEh/UI6p0sMsUMAoGCCqGSM49BAMCA0cAMEQCIASI7TOl1r/luvNnvVAdX2wT\nUXMf3uzjgF/MPdq4ns+DAiAcwkcyK6IrsrJpQYvLj1nerFTL8oVEWXTirFU1LBIX\nAw==\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer1.insurance.example.com",
+                "hostnameOverride": "peer1.insurance.example.com"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ca.insurance.example.com": {
+            "url": "https://localhost:7054",
+            "caName": "ca-insurance",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICZjCCAgygAwIBAgIRAOf6+gGfCKmF7sz36DTQcmswCgYIKoZIzj0EAwIwfTEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xHjAcBgNVBAoTFWluc3VyYW5jZS5leGFtcGxlLmNvbTEhMB8GA1UE\nAxMYY2EuaW5zdXJhbmNlLmV4YW1wbGUuY29tMB4XDTIwMDcyNjExNDUwMFoXDTMw\nMDcyNDExNDUwMFowfTELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWEx\nFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28xHjAcBgNVBAoTFWluc3VyYW5jZS5leGFt\ncGxlLmNvbTEhMB8GA1UEAxMYY2EuaW5zdXJhbmNlLmV4YW1wbGUuY29tMFkwEwYH\nKoZIzj0CAQYIKoZIzj0DAQcDQgAEau6ZATqKVLcrcT9zXyplVKJgQbWtZvNVEllm\nQ+drydRxRjSKXDmsTyChzhihvbGrGgJXQme0Yic0+HK0UYWpVqNtMGswDgYDVR0P\nAQH/BAQDAgGmMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMB\nAf8EBTADAQH/MCkGA1UdDgQiBCAPK0nN6FAy3aVpq3S5/Er4AASC0w7LX9UMuQMP\nqw1uCTAKBggqhkjOPQQDAgNIADBFAiEA3Y0hbcUAC3fMDoJIkl76yD9YaI4VukZn\n4oh0QGmxoJ0CIDB6xLC2Eot9lqK8llNTdP05rQHGolhebW+MxD9X4tBN\n-----END CERTIFICATE-----\n"
+            },
+            "httpOptions": {
+                "verify": false
+            }
+        }
+    }
+}
