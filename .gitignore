@@ -1,2 +1,2 @@
-./artifacts/node-api/node_modules
+/artifacts/node-api/node_modules
 .vscode
